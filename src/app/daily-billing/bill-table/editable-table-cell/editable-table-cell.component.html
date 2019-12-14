@@ -1,3 +1,6 @@
-<label *ngIf="!editable || !activated" (click)="activated = !activated">{{amount}}</label>
-<input *ngIf="editable && activated" type="number" [value]="amount"
-       (keydown.enter)="onAmountChanged($event)" (blur)="activated = !activated">
+<div class="editable-cell">
+  <label *ngIf="!editable || !activated" (click)="activated = !activated">{{amount}}</label>
+  <input *ngIf="editable && activated" type="number" [value]="amount"
+         (keydown.enter)="onAmountChanged($event)" (blur)="activated = !activated">
+  <i class="fa fa-pen"  *ngIf="editable && !activated"w></i>
+</div>
