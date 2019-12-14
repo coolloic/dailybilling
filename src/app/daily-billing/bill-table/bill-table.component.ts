@@ -5,7 +5,7 @@ import {Bill} from '../pojo/bill';
   templateUrl: './bill-table.component.html',
   styleUrls: ['./bill-table.component.styl']
 })
-export class BillTableComponent {
+export class BillTableComponent  {
   @Input()
   header: string[];
   @Input()

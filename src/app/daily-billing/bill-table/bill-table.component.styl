@@ -1,0 +1,23 @@
+:host
+  .table
+    background-color #24292e
+    color #fff
+    &--title
+      font-size 1.2rem
+      text-transform uppercase
+
+    &--row
+      display flex
+      border-top 1px solid rgba(255, 255, 255, .3)
+
+      &:nth-child(2n)
+        background-color rgba(255, 255, 255, .05)
+      &:not(.table--header):hover
+        background-color rgba(255, 255, 255, .4)
+
+    &--cell
+      padding .75rem
+      flex-grow 1
+      flex-basis 0
+
+

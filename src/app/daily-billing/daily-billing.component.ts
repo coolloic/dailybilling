@@ -35,12 +35,12 @@ export class DailyBillingComponent {
       switch (csvResponse.code) {
         case CSVResponseCode.SUCCESS:
           console.log(`[code : ${csvResponse.code} , length : ${csvResponse.records.length}]`);
-          // clear error message
-          this.fileInputFiled.updateMessage(null);
           // update BillPreview model
           this.billPreview.isLoaded = true;
           this.billPreview.items = csvResponse.records || [];
           this.billPreview.header = csvResponse.header || ['date', 'amount', 'summary'];
+          // clear error message
+          this.fileInputFiled.updateMessage(null);
           break;
         case CSVResponseCode.EMPTY_RECORD:
         case CSVResponseCode.INVALID_CSV_FILE:
