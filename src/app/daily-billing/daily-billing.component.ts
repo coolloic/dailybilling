@@ -20,7 +20,7 @@ export class DailyBillingComponent implements AfterViewInit {
     height: 500
   };
   private stepper = [
-    {select: 'one', title: 'Upload your daily billing CSV file', active: true},
+    {select: 'one', title: 'Upload your daily billing CSV file'},
     {select: 'two', title: 'Bill preview'},
     {select: 'three', title: 'Daily billing chart'}
   ];
@@ -106,12 +106,12 @@ export class DailyBillingComponent implements AfterViewInit {
   }
 
   onStepperCancelClicked(event: any) {
-    console.log('onStepperCancelClicked');
+    console.log(`onStepperCancelClicked ${event}`);
     this.billStepper.pre();
   }
 
   onStepperContinueClicked(event: any) {
-    console.log('onStepperContinueClicked');
+    console.log(`onStepperContinueClicked ${event}`);
     this.billStepper.next();
   }
 

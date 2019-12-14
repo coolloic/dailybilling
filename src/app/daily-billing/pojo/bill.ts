@@ -1,4 +1,4 @@
-export class Bill {
+export interface Bill {
   id: any;
   date: string;
   amount: number;

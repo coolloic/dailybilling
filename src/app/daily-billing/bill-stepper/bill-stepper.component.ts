@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Step} from '../pojo/step';
 
 @Component({
   selector: 'app-bill-stepper',
@@ -7,7 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class BillStepperComponent {
   @Input()
-  data: any;
+  data: Step[];
   @Output()
   cancelClickEmitter: EventEmitter<number> = new EventEmitter<number>();
   @Output()
