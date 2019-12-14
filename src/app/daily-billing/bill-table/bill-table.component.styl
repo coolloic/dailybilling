@@ -28,20 +28,50 @@
       .table--row
         display block
         background-color #24292e
-        border-radius 5px
         @media (min-width 768px)
           display flex
           border-radius 0
-      .table--row + .table--row
-        margin-top 8px
+          &:nth-child(2n)
+            background-color rgba(36, 41, 46, .9)
         @media (min-width 768px)
           margin-top 0
       .table--cell
         display block
+
+        &.date:before, &.amount:before, &.summary:before
+          position absolute
+          left 15px
+          top 50%
+          margin-top -9px
+          width 20px
+          height 20px
+          background-color #eee
+          color #000
+          text-indent 5px
+          line-height 20px
+
+        &.date:before
+          content 'D'
+
+        &.amount:before
+          content 'A'
+
+        &.summary:before
+          content 'S'
+
+        @media (min-width 768px)
+          &:before
+            display none
         /deep/
-          font-size 1.5rem
+        font-size
+          1.5rem
+          padding-left 60px
+          position relative
+
           @media (min-width 768px)
             font-size 1rem
+            padding-left 15px
+
           input
             width 100%
             font-size 1.5rem

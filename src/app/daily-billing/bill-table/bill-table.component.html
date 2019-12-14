@@ -6,13 +6,13 @@
   </div>
   <div class="table--body">
     <div *ngFor="let item of items" class="table--row">
-      <div class="table--cell" title="Date">
+      <div class="table--cell date" title="Date">
         {{item.date | dateFormat}}
       </div>
-      <div class="table--cell" title="Amount">
+      <div class="table--cell amount" title="Amount">
         <app-editable-table-cell [id]="item.id" [editable]="editable" [amount]="item.amount" (amountChangeEmitter)="onAmountCellChanged($event)"></app-editable-table-cell>
       </div>
-      <div class="table--cell" title="Summary">
+      <div class="table--cell summary" title="Summary">
         {{item.summary}}
       </div>
     </div>
