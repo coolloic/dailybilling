@@ -1,4 +1,4 @@
-import { CSVReader } from './csvreader';
+import {CSVReader} from './csvreader';
 
 describe('CSVReader', () => {
   it('should create an instance', () => {
