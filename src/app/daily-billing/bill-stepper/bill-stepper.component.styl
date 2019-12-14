@@ -40,13 +40,46 @@
         font-size 1rem
         margin-right 1px
         background-color rgba(0, 0, 0, .38)
+
       &.step--active
         .step--number
           background-color #1976d2
+
       .step--title
         display none
         font-size 1rem
         margin-left 10px
         @media (min-width 512px)
           display inline-block
+
+  .stepper--content
+    .step--content
+      display none
+      &.step--active
+        display block
+
+  .stepper--footer
+    display flex
+    margin -8px
+    margin-top 30px
+    padding 15px 8px
+    box-shadow 0 -3px 3px 0 rgba(32, 33, 36, 0.18)
+    @media (min-width 768px)
+      justify-content flex-end
+
+    button
+      font-size 1.5rem
+      width 100%
+      padding 15px 0
+      border 1px solid rgba(0, 0, 0, .5)
+      outline none
+      cursor pointer
+      @media (min-width 768px)
+        width auto
+        min-width 150px
+        margin-left 10px
+
+      &.primary
+        background-color steelblue
+        color #fff
 

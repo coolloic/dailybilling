@@ -4,6 +4,7 @@ import {FileUploadComponent} from './file-upload/file-upload.component';
 import {BillPreview} from './pojo/bill-preview';
 import {Bill} from './pojo/bill';
 import {BillLineChartComponent} from './bill-line-chart/bill-line-chart.component';
+import {BillStepperComponent} from './bill-stepper/bill-stepper.component';
 
 @Component({
   selector: 'app-daily-billing',
@@ -18,12 +19,20 @@ export class DailyBillingComponent implements AfterViewInit {
     width: 960,
     height: 500
   };
+  private stepper = [
+    {select: 'one', title: 'Upload your daily billing CSV file', active: true},
+    {select: 'two', title: 'Bill preview'},
+    {select: 'three', title: 'Daily billing chart'}
+  ];
 
   @ViewChild(FileUploadComponent, {static: false})
   private fileInputFiled: FileUploadComponent;
 
   @ViewChild(BillLineChartComponent, {static: false})
-  lineChart: BillLineChartComponent;
+  private lineChart: BillLineChartComponent;
+
+  @ViewChild(BillStepperComponent, {static: false})
+  private billStepper: BillStepperComponent;
 
   ngAfterViewInit() {
     this.defectScreenSize();
@@ -80,6 +89,8 @@ export class DailyBillingComponent implements AfterViewInit {
           this.billPreview.header = csvResponse.header || ['date', 'amount', 'summary'];
           // clear error message
           this.fileInputFiled.updateMessage(null);
+          // update stepper
+          this.billStepper.next();
           break;
         case CSVResponseCode.EMPTY_RECORD:
         case CSVResponseCode.INVALID_CSV_FILE:
@@ -92,6 +103,16 @@ export class DailyBillingComponent implements AfterViewInit {
           break;
       }
     });
+  }
+
+  onStepperCancelClicked(event: any) {
+    console.log('onStepperCancelClicked');
+    this.billStepper.pre();
+  }
+
+  onStepperContinueClicked(event: any) {
+    console.log('onStepperContinueClicked');
+    this.billStepper.next();
   }
 
 }

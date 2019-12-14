@@ -1,29 +1,23 @@
 <div class="stepper">
   <div class="stepper--header">
-    <div class="step">
-      <span class="step--number">1</span>
-      <span class="step--title">One</span>
-    </div>
-    <hr class="step--divider">
-    <div class="step step--active">
-      <span class="step--number">2</span>
-      <span class="step--title">Two</span>
-    </div>
-    <hr class="step--divider">
-    <div class="step">
-      <span class="step--number">3</span>
-      <span class="step--title">Three</span>
+    <div *ngFor="let item of data; let i = index;" [className]="(i + 1) <= activeContentIndex ? 'step step--active' : 'step'">
+      <span class="step--number">{{i + 1}}</span>
+      <span class="step--title">{{item.title}}</span>
     </div>
   </div>
   <div class="stepper--content">
-    <div class="step--content">
+    <div [className]="activeContentIndex === 1 ? 'step--content step--active' : 'step--content'">
       <ng-content select="[one]"></ng-content>
     </div>
-    <div class="step--content">
+    <div [className]="activeContentIndex === 2 ? 'step--content step--active' : 'step--content'">
       <ng-content select="[two]"></ng-content>
     </div>
-    <div class="step--content">
+    <div [className]="activeContentIndex === 3 ? 'step--content step--active' : 'step--content'">
       <ng-content select="[three]"></ng-content>
     </div>
+  </div>
+  <div class="stepper--footer" *ngIf="activeContentIndex !== 1">
+    <button (click)="cancelClicked($event)">Cancel</button>
+    <button *ngIf="activeContentIndex !== 3" class="primary" (click)="continueClicked($event)">Continue</button>
   </div>
 </div>

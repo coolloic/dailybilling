@@ -1,13 +1,14 @@
-<app-bill-stepper>
+<app-bill-stepper (cancelClickEmitter)="onStepperCancelClicked($event)"
+                  (continueClickEmitter)="onStepperContinueClicked($event)" [data]="stepper">
   <div one>
     <fieldset>
-      <legend>Upload your daily billing CSV file</legend>
+      <legend>{{stepper[0].title}}</legend>
       <app-file-upload (fileChangeEmitter)="onFileSelected($event)"></app-file-upload>
     </fieldset>
   </div>
   <div two>
     <fieldset class="no-padding no-margin">
-      <legend>Bill Preview</legend>
+      <legend>{{stepper[1].title}}</legend>
       <app-bill-preview *ngIf="billPreview.isLoaded || false" [header]="billPreview.header"
                         [items]="billPreview.items | sortByDate"
                         (initBalanceChangeEmitter)="onInitBalanceChanged($event)"></app-bill-preview>
@@ -15,7 +16,7 @@
   </div>
   <div three>
     <fieldset class="no-padding no-margin">
-      <legend>Daily Billing Chart</legend>
+      <legend>{{stepper[2].title}}</legend>
       <app-bill-line-chart *ngIf="billPreview.isLoaded || false" [data]="billPreview.items | sortByDate"
                            [width]="lineChartOpts.width"
                            [height]="lineChartOpts.height"></app-bill-line-chart>
