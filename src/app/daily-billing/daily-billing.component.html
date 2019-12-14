@@ -2,6 +2,8 @@
 <app-bill-preview *ngIf="billPreview.isLoaded || false" [header]="billPreview.header"
                   [items]="billPreview.items | sortByDate"
                   (initBalanceChangeEmitter)="onInitBalanceChanged($event)"></app-bill-preview>
+<app-bill-line-chart *ngIf="billPreview.isLoaded || false" [data]="billPreview.items | sortByDate" [width]="lineChartOpts.width"
+                     [height]="lineChartOpts.height"></app-bill-line-chart>
 <app-bill-table [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
                 (editableCellChanged)="onAmountChanged($event)">
 </app-bill-table>

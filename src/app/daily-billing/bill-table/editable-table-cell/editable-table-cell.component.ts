@@ -18,7 +18,6 @@ export class EditableTableCellComponent {
 
   onAmountChanged(event) {
     if (this.editable) {
-      this.activated = false;
       this.amountChangeEmitter.emit({
         id: this.id,
         value: event.target.value

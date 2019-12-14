@@ -3,6 +3,7 @@ import {CSVReader, CSVResponse, CSVResponseCode} from '../shared/util/csvreader'
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {BillPreview} from './pojo/bill-preview';
 import {Bill} from './pojo/bill';
+import {BillLineChartComponent} from './bill-line-chart/bill-line-chart.component';
 
 @Component({
   selector: 'app-daily-billing',
@@ -13,18 +14,27 @@ export class DailyBillingComponent {
   private csvReader: CSVReader = new CSVReader();
   private billPreview: BillPreview = {isLoaded: false, header: [], items: []};
   private initialBalance: number;
+  private lineChartOpts = {
+    width: 960,
+    height: 500
+  };
 
   @ViewChild(FileUploadComponent, {static: false})
   private fileInputFiled: FileUploadComponent;
 
+  @ViewChild(BillLineChartComponent, {static: false})
+  lineChart: BillLineChartComponent;
+
   /**
    * update the bill mount
-   * @param payload
    */
   onAmountChanged(payload: any) {
     const bill = this.billPreview.items.find((item: Bill) => item.id === payload.id);
     if (bill) {
+      // update amount
       bill.amount = Number(payload.value);
+      // refresh line chart on amount changed
+      this.lineChart.refreshDot();
     }
   }
 
@@ -34,7 +44,6 @@ export class DailyBillingComponent {
 
   /**
    * read date from CSV file and render to table
-   * @param file
    */
   onFileSelected(file: any) {
     this.csvReader.readCSVFile(file, (csvResponse: CSVResponse) => {
