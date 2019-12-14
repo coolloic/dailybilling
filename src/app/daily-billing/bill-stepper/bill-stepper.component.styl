@@ -1,0 +1,52 @@
+:host
+  .stepper--header
+    text-align left
+    display flex
+    align-items stretch
+    justify-content space-between
+    margin-bottom 15px
+    box-shadow 0 1px 6px 0 rgba(32,33,36,0.28)
+    margin -8px
+    padding 8px
+    @media (min-width 768px)
+      padding 15px
+    margin-bottom 20px
+    .step--divider
+      display block
+      flex 1 1 0px
+      height 0
+      max-height 0
+      border solid
+      border-width thin 0 0
+      border-color rgba(0, 0, 0, .3)
+      align-self center
+      margin 0 15px
+    .step
+      vertical-align middle
+      height 40px
+      line-height @height
+      white-space nowrap
+      cursor pointer
+      position relative
+      .step--number
+        position relative
+        display inline-block
+        width 40px
+        height 40px
+        border-radius 50%
+        height 100%
+        color #fff
+        text-indent 15px
+        font-size 1rem
+        margin-right 1px
+        background-color rgba(0, 0, 0, .38)
+      &.step--active
+        .step--number
+          background-color #1976d2
+      .step--title
+        display none
+        font-size 1rem
+        margin-left 10px
+        @media (min-width 512px)
+          display inline-block
+

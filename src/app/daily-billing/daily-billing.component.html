@@ -1,9 +1,30 @@
-<app-file-upload (fileChangeEmitter)="onFileSelected($event)"></app-file-upload>
-<app-bill-preview *ngIf="billPreview.isLoaded || false" [header]="billPreview.header"
-                  [items]="billPreview.items | sortByDate"
-                  (initBalanceChangeEmitter)="onInitBalanceChanged($event)"></app-bill-preview>
-<app-bill-line-chart *ngIf="billPreview.isLoaded || false" [data]="billPreview.items | sortByDate" [width]="lineChartOpts.width"
-                     [height]="lineChartOpts.height"></app-bill-line-chart>
-<app-bill-table [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
-                (editableCellChanged)="onAmountChanged($event)">
-</app-bill-table>
+<app-bill-stepper>
+  <div one>
+    <fieldset>
+      <legend>Upload your daily billing CSV file</legend>
+      <app-file-upload (fileChangeEmitter)="onFileSelected($event)"></app-file-upload>
+    </fieldset>
+  </div>
+  <div two>
+    <fieldset class="no-padding no-margin">
+      <legend>Bill Preview</legend>
+      <app-bill-preview *ngIf="billPreview.isLoaded || false" [header]="billPreview.header"
+                        [items]="billPreview.items | sortByDate"
+                        (initBalanceChangeEmitter)="onInitBalanceChanged($event)"></app-bill-preview>
+    </fieldset>
+  </div>
+  <div three>
+    <fieldset class="no-padding no-margin">
+      <legend>Daily Billing Chart</legend>
+      <app-bill-line-chart *ngIf="billPreview.isLoaded || false" [data]="billPreview.items | sortByDate"
+                           [width]="lineChartOpts.width"
+                           [height]="lineChartOpts.height"></app-bill-line-chart>
+      <app-bill-table [isTile]="true"  [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
+                      (editableCellChanged)="onAmountChanged($event)">
+      </app-bill-table>
+    </fieldset>
+  </div>
+</app-bill-stepper>
+
+
+

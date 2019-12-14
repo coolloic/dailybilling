@@ -7,6 +7,8 @@ import {Bill} from '../pojo/bill';
 })
 export class BillTableComponent  {
   @Input()
+  isTile: boolean;
+  @Input()
   header: string[];
   @Input()
   items: Bill[];

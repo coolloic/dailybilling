@@ -1,6 +1,7 @@
-<app-bill-table [header]="header" [items]="items" (editableCellChanged)="onTableCellChanged($event)">
-</app-bill-table>
-<div class="form-group">
+<div class="balance-field">
   <label>Initial Balance</label>
   <input type="number" [value]="defaultValue ? defaultValue : 1000" (change)="onInitBalanceChanged($event)">
 </div>
+<app-bill-table [header]="header" [items]="items" (editableCellChanged)="onTableCellChanged($event)">
+</app-bill-table>
+

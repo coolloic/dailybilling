@@ -1,1 +1,29 @@
-<p>bill-stepper works!</p>
+<div class="stepper">
+  <div class="stepper--header">
+    <div class="step">
+      <span class="step--number">1</span>
+      <span class="step--title">One</span>
+    </div>
+    <hr class="step--divider">
+    <div class="step step--active">
+      <span class="step--number">2</span>
+      <span class="step--title">Two</span>
+    </div>
+    <hr class="step--divider">
+    <div class="step">
+      <span class="step--number">3</span>
+      <span class="step--title">Three</span>
+    </div>
+  </div>
+  <div class="stepper--content">
+    <div class="step--content">
+      <ng-content select="[one]"></ng-content>
+    </div>
+    <div class="step--content">
+      <ng-content select="[two]"></ng-content>
+    </div>
+    <div class="step--content">
+      <ng-content select="[three]"></ng-content>
+    </div>
+  </div>
+</div>

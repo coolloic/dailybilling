@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bill-stepper.component.styl']
 })
 export class BillStepperComponent implements OnInit {
+  data = []
 
   constructor() { }
 

@@ -1,4 +1,4 @@
-<div class="table" *ngIf="header.length > 0 && items.length > 0">
+<div [className]="isTile ? 'table tile' : 'table'" *ngIf="header.length > 0 && items.length > 0">
   <div class="table--row table--header">
     <div *ngFor="let item of header" class="table--title table--cell">
       {{item}}
@@ -6,13 +6,13 @@
   </div>
   <div class="table--body">
     <div *ngFor="let item of items" class="table--row">
-      <div class="table--cell">
+      <div class="table--cell" title="Date">
         {{item.date | dateFormat}}
       </div>
-      <div class="table--cell">
+      <div class="table--cell" title="Amount">
         <app-editable-table-cell [id]="item.id" [editable]="editable" [amount]="item.amount" (amountChangeEmitter)="onAmountCellChanged($event)"></app-editable-table-cell>
       </div>
-      <div class="table--cell">
+      <div class="table--cell" title="Summary">
         {{item.summary}}
       </div>
     </div>

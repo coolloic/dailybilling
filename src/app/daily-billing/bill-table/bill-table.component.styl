@@ -1,7 +1,9 @@
 :host
   .table
+    overflow hidden
     background-color #24292e
     color #fff
+
     &--title
       font-size 1.2rem
       text-transform uppercase
@@ -19,5 +21,33 @@
       padding .75rem
       flex-grow 1
       flex-basis 0
-
-
+      /deep/
+        font-size 1rem
+    &.tile
+      background-color transparent
+      .table--row
+        display block
+        background-color #24292e
+        border-radius 5px
+        @media (min-width 768px)
+          display flex
+          border-radius 0
+      .table--row + .table--row
+        margin-top 8px
+        @media (min-width 768px)
+          margin-top 0
+      .table--cell
+        display block
+        /deep/
+          font-size 1.5rem
+          @media (min-width 768px)
+            font-size 1rem
+          input
+            width 100%
+            font-size 1.5rem
+            @media (min-width 768px)
+              font-size 1rem
+      .table--header
+        display none
+        @media (min-width 768px)
+          display flex
