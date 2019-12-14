@@ -1,4 +1,7 @@
 <app-file-upload (fileChangeEmitter)="onFileSelected($event)"></app-file-upload>
+<app-bill-preview *ngIf="billPreview.isLoaded || false" [header]="billPreview.header"
+                  [items]="billPreview.items | sortByDate"
+                  (initBalanceChangeEmitter)="onInitBalanceChanged($event)"></app-bill-preview>
 <app-bill-table [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
                 (editableCellChanged)="onAmountChanged($event)">
 </app-bill-table>

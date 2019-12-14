@@ -12,6 +12,8 @@ import {Bill} from './pojo/bill';
 export class DailyBillingComponent {
   private csvReader: CSVReader = new CSVReader();
   private billPreview: BillPreview = {isLoaded: false, header: [], items: []};
+  private initialBalance: number;
+
   @ViewChild(FileUploadComponent, {static: false})
   private fileInputFiled: FileUploadComponent;
 
@@ -24,6 +26,10 @@ export class DailyBillingComponent {
     if (bill) {
       bill.amount = Number(payload.value);
     }
+  }
+
+  onInitBalanceChanged(initBalance: number) {
+    this.initialBalance = initBalance;
   }
 
   /**

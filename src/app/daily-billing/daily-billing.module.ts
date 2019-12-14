@@ -8,12 +8,13 @@ import { EditableTableCellComponent } from './bill-table/editable-table-cell/edi
 import { BillStepperComponent } from './bill-stepper/bill-stepper.component';
 import { DailyBillingComponent } from './daily-billing.component';
 import {DateFormatPipe} from '../shared/pipe/date-format.pipe';
+import {SortByDatePipe} from '../shared/pipe/sort-by-date.pipe';
 
 
 
 @NgModule({
   declarations: [BillLineChartComponent, BillPreviewComponent, BillTableComponent, FileUploadComponent,
-    EditableTableCellComponent, BillStepperComponent, DailyBillingComponent, DateFormatPipe],
+    EditableTableCellComponent, BillStepperComponent, DailyBillingComponent, DateFormatPipe, SortByDatePipe],
   exports: [
     DailyBillingComponent
   ],

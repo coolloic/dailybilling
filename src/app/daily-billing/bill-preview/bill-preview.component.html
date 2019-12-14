@@ -1,1 +1,6 @@
-<p>bill-preview works!</p>
+<app-bill-table [header]="header" [items]="items" (editableCellChanged)="onTableCellChanged($event)">
+</app-bill-table>
+<div class="form-group">
+  <label>Initial Balance</label>
+  <input type="number" [value]="defaultValue ? defaultValue : 1000" (change)="onInitBalanceChanged($event)">
+</div>
