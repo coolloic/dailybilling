@@ -1,1 +1,20 @@
-<p>bill-table works!</p>
+<div class="table" *ngIf="header.length > 0 && items.length > 0">
+  <div class="table--row table--header">
+    <div *ngFor="let item of header" class="table--title table--cell">
+      {{item}}
+    </div>
+  </div>
+  <div class="table--body">
+    <div *ngFor="let item of items" class="table--row">
+      <div class="table--cell">
+        {{item.date | dateFormat}}
+      </div>
+      <div class="table--cell">
+        <app-editable-table-cell [id]="item.id" [editable]="editable" [amount]="item.amount" (amountChangeEmitter)="onAmountCellChanged($event)"></app-editable-table-cell>
+      </div>
+      <div class="table--cell">
+        {{item.summary}}
+      </div>
+    </div>
+  </div>
+</div>

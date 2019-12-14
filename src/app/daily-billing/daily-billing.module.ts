@@ -7,17 +7,18 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { EditableTableCellComponent } from './bill-table/editable-table-cell/editable-table-cell.component';
 import { BillStepperComponent } from './bill-stepper/bill-stepper.component';
 import { DailyBillingComponent } from './daily-billing.component';
+import {DateFormatPipe} from '../shared/pipe/date-format.pipe';
 
 
 
 @NgModule({
   declarations: [BillLineChartComponent, BillPreviewComponent, BillTableComponent, FileUploadComponent,
-    EditableTableCellComponent, BillStepperComponent, DailyBillingComponent],
+    EditableTableCellComponent, BillStepperComponent, DailyBillingComponent, DateFormatPipe],
   exports: [
     DailyBillingComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class DailyBillingModule { }

@@ -1,1 +1,8 @@
 <app-file-upload (fileChangeEmitter)="onFileSelected($event)"></app-file-upload>
+<app-bill-table [header]="billPreview.header" [items]="billPreview.items"
+                (editableCellChanged)="onAmountChanged($event)">
+</app-bill-table>
+
+<app-bill-table [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
+                (editableCellChanged)="onAmountChanged($event)">
+</app-bill-table>
