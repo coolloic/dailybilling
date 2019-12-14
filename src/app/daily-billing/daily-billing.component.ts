@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {CSVReader, CSVResponse, CSVResponseCode} from '../shared/util/csvreader';
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {BillPreview} from './pojo/bill-preview';
@@ -10,7 +10,7 @@ import {BillLineChartComponent} from './bill-line-chart/bill-line-chart.componen
   templateUrl: './daily-billing.component.html',
   styleUrls: ['./daily-billing.component.styl']
 })
-export class DailyBillingComponent {
+export class DailyBillingComponent implements AfterViewInit {
   private csvReader: CSVReader = new CSVReader();
   private billPreview: BillPreview = {isLoaded: false, header: [], items: []};
   private initialBalance: number;
@@ -24,6 +24,30 @@ export class DailyBillingComponent {
 
   @ViewChild(BillLineChartComponent, {static: false})
   lineChart: BillLineChartComponent;
+
+  ngAfterViewInit() {
+    this.defectScreenSize();
+  }
+
+  // responsive screenSize defection while loading application, mobile first
+  private defectScreenSize() {
+    const screenSize = window.innerWidth;
+    const opts = this.lineChartOpts;
+    opts.width = screenSize - 120;
+    if (screenSize <= 320) {
+      // iPhone5se
+      opts.height = 320;
+    } else if (screenSize <= 375) {
+      // general mobile width
+      opts.height = 375;
+    } else if (screenSize <= 1024) {
+      // smaller than iPad
+      opts.height = 500;
+    } else {
+      // other devices
+      opts.height = 550;
+    }
+  }
 
   /**
    * update the bill mount
