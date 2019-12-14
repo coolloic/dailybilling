@@ -1,1 +1,5 @@
-<p>file-upload works!</p>
+<div class="form-group">
+  <input id="billing-file" type="file" accept=".csv" (change)="onFileSelected($event)">
+  <label *ngIf="message && message.length > 0">{{message}}</label>
+</div>
+
