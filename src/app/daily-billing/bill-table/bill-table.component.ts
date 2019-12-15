@@ -22,7 +22,7 @@ export class BillTableComponent implements OnInit, OnDestroy {
   private currentPage: number;
   private itemPerPage: number;
   private totalPage: number;
-  private pages: number[];
+  private pages: number[] = [];
   private filteredItem: Bill[];
   private maxDisplayedIndex: number;
   private translateX: number;
