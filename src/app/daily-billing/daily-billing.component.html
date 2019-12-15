@@ -17,10 +17,10 @@
   <div three *ngIf="billPreview.isLoaded || false">
     <fieldset class="no-padding no-margin">
       <legend>{{stepper[2].title}}</legend>
-      <app-bill-line-chart [data]="billPreview.items | sortByDate"
-                           [width]="lineChartOpts.width"
-                           [height]="lineChartOpts.height"></app-bill-line-chart>
-      <app-bill-table [isTile]="true"  [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
+      <app-scalable-line-chart [data]="billPreview.items | sortByDate "
+                               [width]="lineChartOpts.width"
+                               [height]="lineChartOpts.height"></app-scalable-line-chart>
+      <app-bill-table [isTile]="true" [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
                       (editableCellChanged)="onAmountChanged($event)">
       </app-bill-table>
     </fieldset>

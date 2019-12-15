@@ -67,7 +67,8 @@ export class DailyBillingComponent implements AfterViewInit {
       // update amount
       bill.amount = Number(payload.value);
       // refresh line chart on amount changed
-      this.lineChart.refreshDot();
+      // this.lineChart.refreshDot();
+      window.dispatchEvent(new CustomEvent('amount-changed', {detail: this.billPreview.items}));
     }
   }
 
