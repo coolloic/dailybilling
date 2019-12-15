@@ -5,16 +5,31 @@
     </div>
   </div>
   <div class="table--body">
-    <div *ngFor="let item of items" class="table--row">
+    <div *ngFor="let item of filteredItem" class="table--row">
       <div class="table--cell date">
         {{item.date | dateFormat}}
       </div>
       <div class="table--cell amount">
-        <app-editable-table-cell [id]="item.id" [editable]="editable" [amount]="item.amount" (amountChangeEmitter)="onAmountCellChanged($event)"></app-editable-table-cell>
+        <app-editable-table-cell [id]="item.id" [editable]="editable" [amount]="item.amount"
+                                 (amountChangeEmitter)="onAmountCellChanged($event)"></app-editable-table-cell>
       </div>
       <div class="table--cell summary">
         {{item.summary}}
       </div>
+    </div>
+  </div>
+  <div class="table--footer" *ngIf="totalPage && totalPage > 1">
+    <div class="pagination">
+      <button class="pagination--item pagination--pre" [disabled]="currentPage === 1" (click)="pre()"><</button>
+      <div class="pagination--container">
+        <div class="pagination--wrapper" [style.transform]="'translateX(' + translateX + 'px)'">
+          <button [ngClass]="currentPage === page ? 'pagination--active' : ''"
+                  class="pagination--item pagination--index" *ngFor="let page of pages;"
+                  (click)="goto(page)">{{page}}</button>
+        </div>
+      </div>
+      <button class="pagination--item pagination--next" [disabled]="currentPage >= totalPage" (click)="next()">>
+      </button>
     </div>
   </div>
 </div>

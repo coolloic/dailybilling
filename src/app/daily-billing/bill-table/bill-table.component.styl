@@ -3,7 +3,8 @@
     overflow hidden
     background-color #24292e
     color #fff
-
+    &--header
+      border-bottom 1px solid #eee
     &--title
       font-size 1.2rem
       text-transform uppercase
@@ -81,3 +82,37 @@
         display none
         @media (min-width 768px)
           display flex
+  .pagination
+    display flex
+    padding .75rem
+    justify-content flex-end
+    border-top 1px solid #eee
+    background-color #24292e
+    &--item
+      display inline-block
+      color #000
+      font-size 1.2rem
+      min-width: 42px;
+      min-height: 42px;
+      margin-right 8px
+      border 1px solid #eee
+      background-color  #fff
+      text-align center
+      &:disabled
+        background-color  #ddd
+        color #888
+    &--active
+      background-color #1976d2
+      color #fff
+    &--container
+      max-width 150px
+      overflow hidden
+      @media (min-width 768px)
+        max-width 200px
+      @media (min-width 1024px)
+        max-width 350px
+    &--wrapper
+      transition .3s
+      display flex
+      flex-wrap nowrap
+

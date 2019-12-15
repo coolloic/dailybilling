@@ -6,18 +6,18 @@
       <app-file-upload (fileChangeEmitter)="onFileSelected($event)"></app-file-upload>
     </fieldset>
   </div>
-  <div two>
+  <div two *ngIf="billPreview.isLoaded || false">
     <fieldset class="no-padding no-margin">
       <legend>{{stepper[1].title}}</legend>
-      <app-bill-preview *ngIf="billPreview.isLoaded || false" [header]="billPreview.header"
+      <app-bill-preview [header]="billPreview.header"
                         [items]="billPreview.items | sortByDate"
                         (initBalanceChangeEmitter)="onInitBalanceChanged($event)"></app-bill-preview>
     </fieldset>
   </div>
-  <div three>
+  <div three *ngIf="billPreview.isLoaded || false">
     <fieldset class="no-padding no-margin">
       <legend>{{stepper[2].title}}</legend>
-      <app-bill-line-chart *ngIf="billPreview.isLoaded || false" [data]="billPreview.items | sortByDate"
+      <app-bill-line-chart [data]="billPreview.items | sortByDate"
                            [width]="lineChartOpts.width"
                            [height]="lineChartOpts.height"></app-bill-line-chart>
       <app-bill-table [isTile]="true"  [header]="billPreview.header" [items]="billPreview.items" [editable]="true"
