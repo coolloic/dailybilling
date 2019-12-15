@@ -149,6 +149,7 @@ export class ScalableLineChartComponent implements OnInit {
       } // ignore brush-by-zoom
       const s = d3.event.selection || x2.range();
       x.domain(s.map(x2.invert, x2));
+      lineChart.selectAll('.dot').transition().attr('cx', (d: any) => x(d.date));
       lineChart.select('.line').transition().attr('d', line);
       focus.select('.axis--x').call(xAxis);
       svg.select('.zoom').call(zoom.transform, d3.zoomIdentity
