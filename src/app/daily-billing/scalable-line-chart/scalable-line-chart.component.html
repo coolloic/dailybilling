@@ -1,0 +1,8 @@
+<div class="scalable-line-chart">
+  <svg width="960" height="500"></svg>
+  <div class="tooltip" *ngIf="selectBill" [style.transform]="'translateX(' + selectBill.x + 'px)'">
+    <span><b>Date:</b>{{selectBill.date | dateFormat}}</span>
+    <span><b>Amount:</b>{{selectBill.amount}}</span>
+    <span><b>Summary:</b>{{selectBill.summary}}</span>
+  </div>
+</div>

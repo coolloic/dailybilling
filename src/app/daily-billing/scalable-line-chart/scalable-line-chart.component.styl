@@ -1,0 +1,28 @@
+:host
+  .scalable-line-chart
+    position relative
+  .tooltip
+    position absolute
+    box-shadow 0 1px 6px 0 rgba(32,33,36,0.28)
+    border 1px solid #eee
+    background-color rgba(255, 255, 255, .6)
+    top 0
+    padding 15px
+    span
+      display flex
+      b
+        min-width 80px
+
+  /deep/
+    .line
+      fill none
+      stroke steelblue
+      stroke-width 1.5px
+    .zoom
+      cursor move
+      fill none
+      pointer-events all
+    .dot
+      fill steelblue
+      stroke-width 1px
+      stroke #eee
