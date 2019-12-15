@@ -29,7 +29,7 @@ export class BillTableComponent implements OnInit, OnDestroy {
   private prevIndex: number;
 
   ngOnInit(): void {
-    this.itemPerPage = this.pageSize ? this.pageSize : 2;
+    this.itemPerPage = this.pageSize ? this.pageSize : 10;
     this.totalPage = Number(this.items.length / this.itemPerPage);
     for (let i = 0; i < this.totalPage; i++) {
       this.pages.push(i + 1);
