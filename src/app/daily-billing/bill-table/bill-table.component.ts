@@ -29,7 +29,7 @@ export class BillTableComponent implements OnInit, OnDestroy {
   private prevIndex: number;
 
   ngOnInit(): void {
-    this.itemPerPage = this.pageSize ? this.pageSize : 10;
+    this.itemPerPage = this.pageSize ? this.pageSize : 2;
     this.totalPage = Number(this.items.length / this.itemPerPage);
     for (let i = 0; i < this.totalPage; i++) {
       this.pages.push(i + 1);
@@ -52,27 +52,45 @@ export class BillTableComponent implements OnInit, OnDestroy {
 
   updateFilteredItem() {
     this.filteredItem = this.items.slice((this.currentPage - 1) * this.itemPerPage, this.currentPage * this.itemPerPage);
-    const maxIndex = this.totalPage - this.maxDisplayedIndex + 2;
-    const step = maxIndex <= this.currentPage ? maxIndex : this.currentPage;
-    this.translateX = -(step - 1) * 50;
-
   }
 
   pre() {
-    this.prevIndex = this.currentPage;
-    this.currentPage--;
+    this.preStep();
     this.updateFilteredItem();
+  }
+
+  preStep() {
+    this.currentPage--;
+    this.prevIndex = this.currentPage;
+    if (this.currentPage > 1) {
+      this.translateX += 50;
+      this.translateX = this.translateX > 0 ? 0 : this.translateX;
+    }
   }
 
   next() {
-    this.prevIndex = this.currentPage;
-    this.currentPage++;
+    this.nextStep();
     this.updateFilteredItem();
   }
 
-  goto(index: number) {
+  nextStep() {
+    this.currentPage++;
     this.prevIndex = this.currentPage;
-    this.currentPage = index;
+    if ((this.currentPage - 2) <= this.totalPage - this.maxDisplayedIndex) {
+      this.translateX -= 50;
+    }
+  }
+
+  goto(index: number) {
+    const offset = index - this.prevIndex;
+    const direction = offset > 0;
+    for (let i = 0; i < Math.abs(offset); i++) {
+      if (direction) {
+        this.nextStep();
+      } else {
+        this.preStep();
+      }
+    }
     this.updateFilteredItem();
   }
 
