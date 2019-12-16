@@ -109,6 +109,9 @@ export class DailyBillingComponent implements AfterViewInit {
   onStepperCancelClicked(event: any) {
     console.log(`onStepperCancelClicked ${event}`);
     this.billStepper.pre();
+    if (this.billStepper.activeContentIndex === 1) {
+      this.billPreview = {isLoaded: false, header: [], items: []};
+    }
   }
 
   onStepperContinueClicked(event: any) {
