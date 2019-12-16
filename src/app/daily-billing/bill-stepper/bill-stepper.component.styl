@@ -12,6 +12,15 @@
     position fixed
     background-color #fff
     z-index 99
+    position relative
+    &:before
+      content ' '
+      position absolute
+      left 5%
+      top 50%
+      height 1px
+      width 90%
+      background-color #ccc
     @media (min-width 768px)
       width auto
       position relative
@@ -30,6 +39,7 @@
     .step
       vertical-align middle
       height 40px
+      background-color #fff
       line-height @height
       white-space nowrap
       cursor pointer
