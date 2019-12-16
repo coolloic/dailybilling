@@ -12,7 +12,18 @@
       display flex
       b
         min-width 80px
-
+  svg
+    position relative
+    width 100%
+    max-width 320px
+    @media (min-width 375px)
+      max-width 375px
+    @media (min-width 768px)
+      max-width 768px
+    @media (min-width 1024px)
+      max-width 1024px
+    @media (min-width 1400px)
+      max-width 100%
   /deep/
     .line
       fill none

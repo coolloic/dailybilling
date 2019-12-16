@@ -24,6 +24,18 @@ export class ScalableLineChartComponent implements OnInit {
     y: number
   };
 
+  resposiveOffset() {
+    const screenSize = window.innerWidth;
+    let offset = 0;
+    if (screenSize >= 1400) {
+      offset = 45;
+    } else if (screenSize >= 768) {
+      offset = 30;
+    }
+    return offset;
+  }
+
+
   ngOnInit() {
     let timer: any = null;
     window.addEventListener('dot-clicked', (payload: any) => {
@@ -39,7 +51,7 @@ export class ScalableLineChartComponent implements OnInit {
     const svg = d3.select('svg');
     const margin = {top: 20, right: 20, bottom: 110, left: 40};
     const margin2 = {top: 430, right: 20, bottom: 30, left: 40};
-    const width = +svg.attr('width') - margin.left - margin.right;
+    const width = +window.innerWidth - margin.left - margin.right - this.resposiveOffset();
     const height = +svg.attr('height') - margin.top - margin.bottom;
     const height2 = +svg.attr('height') - margin2.top - margin2.bottom;
 
