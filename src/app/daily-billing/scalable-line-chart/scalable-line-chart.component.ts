@@ -25,9 +25,13 @@ export class ScalableLineChartComponent implements OnInit {
   };
 
   ngOnInit() {
+    let timer: any = null;
     window.addEventListener('dot-clicked', (payload: any) => {
       this.selectBill = payload.detail;
-      setTimeout(() => this.selectBill = null, 3000);
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => this.selectBill = null, 3000);
     });
     const sortByDatePipe: SortByDatePipe = new SortByDatePipe();
     const mergeAmountByDatePipe: MergeAmountByDatePipe = new MergeAmountByDatePipe();
