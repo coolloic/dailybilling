@@ -1,6 +1,20 @@
 import {Component, Input, OnInit} from '@angular/core';
-import * as d3 from 'd3';
-import {timeFormat} from 'd3';
+import {
+  axisBottom,
+  axisLeft,
+  brushX,
+  event,
+  extent,
+  line,
+  max,
+  min,
+  scaleLinear,
+  scaleTime,
+  select,
+  timeParse,
+  zoom,
+  zoomIdentity
+} from 'd3';
 import {SortByDatePipe} from '../../shared/pipe/sort-by-date.pipe';
 import {MergeAmountByDatePipe} from '../../shared/pipe/merge-amount-by-date.pipe';
 
@@ -48,39 +62,39 @@ export class ScalableLineChartComponent implements OnInit {
     const sortByDatePipe: SortByDatePipe = new SortByDatePipe();
     const mergeAmountByDatePipe: MergeAmountByDatePipe = new MergeAmountByDatePipe();
     let data = transformData(this.data);
-    const svg = d3.select('svg');
+    const svg = select('svg');
     const margin = {top: 20, right: 20, bottom: 110, left: 40};
     const margin2 = {top: 430, right: 20, bottom: 30, left: 40};
     const width = +window.innerWidth - margin.left - margin.right - this.resposiveOffset();
     const height = +svg.attr('height') - margin.top - margin.bottom;
     const height2 = +svg.attr('height') - margin2.top - margin2.bottom;
 
-    const parseDate = d3.timeParse('%m/%d/%Y');
+    const parseDate = timeParse('%m/%d/%Y %H:%M');
 
-    const x = d3.scaleTime().range([0, width]);
-    const x2 = d3.scaleTime().range([0, width]);
-    const y = d3.scaleLinear().range([height, 0]);
-    const y2 = d3.scaleLinear().range([height2, 0]);
+    const x = scaleTime().range([0, width]);
+    const x2 = scaleTime().range([0, width]);
+    const y = scaleLinear().range([height, 0]);
+    const y2 = scaleLinear().range([height2, 0]);
 
-    const xAxis = d3.axisBottom(x).tickFormat(timeFormat('%m/%d/%Y'));
-    const xAxis2 = d3.axisBottom(x2).tickFormat(timeFormat('%m/%d/%Y'));
-    const yAxis = d3.axisLeft(y);
+    const xAxis = axisBottom(x);
+    const xAxis2 = axisBottom(x2);
+    const yAxis = axisLeft(y);
 
-    const brush = d3.brushX()
+    const brush = brushX()
       .extent([[0, 0], [width, height2]])
       .on('brush end', brushed);
 
-    const zoom = d3.zoom()
+    const z = zoom()
       .scaleExtent([1, Infinity])
       .translateExtent([[0, 0], [width, height]])
       .extent([[0, 0], [width, height]])
       .on('zoom', zoomed);
 
-    const line = d3.line()
+    const ln = line()
       .x((d: any) => x(d.date))
       .y((d: any) => y(d.amount));
 
-    const line2 = d3.line()
+    const line2 = line()
       .x((d: any) => x2(d.date))
       .y((d: any) => y2(d.amount));
 
@@ -96,7 +110,7 @@ export class ScalableLineChartComponent implements OnInit {
       .attr('width', width)
       .attr('height', height)
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-      .call(zoom);
+      .call(z);
     const focus = svg.append('g')
       .attr('class', 'focus')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -110,8 +124,8 @@ export class ScalableLineChartComponent implements OnInit {
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
       .attr('clip-path', 'url(#clip)');
 
-    x.domain(d3.extent(data, (d: any) => d.date));
-    y.domain([d3.min(data, (d: any) => Number(d.amount)), d3.max(data, (d: any) => Number(d.amount))]);
+    x.domain(extent(data, (d: any) => d.date));
+    y.domain([min(data, (d: any) => Number(d.amount)), max(data, (d: any) => Number(d.amount))]);
     x2.domain(x.domain());
     y2.domain(y.domain());
 
@@ -128,7 +142,7 @@ export class ScalableLineChartComponent implements OnInit {
     lineChart.append('path')
       .datum(data)
       .attr('class', 'line')
-      .attr('d', line);
+      .attr('d', ln);
 
     lineChart.selectAll('.dot')
       .data(data)
@@ -160,27 +174,27 @@ export class ScalableLineChartComponent implements OnInit {
 
 
     function brushed() {
-      if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') {
+      if (event.sourceEvent && event.sourceEvent.type === 'zoom') {
         return;
       } // ignore brush-by-zoom
-      const s = d3.event.selection || x2.range();
+      const s = event.selection || x2.range();
       x.domain(s.map(x2.invert, x2));
       lineChart.selectAll('.dot').transition().attr('cx', (d: any) => x(d.date));
-      lineChart.select('.line').transition().attr('d', line);
+      lineChart.select('.line').transition().attr('d', ln);
       focus.select('.axis--x').call(xAxis);
-      svg.select('.zoom').call(zoom.transform, d3.zoomIdentity
+      svg.select('.zoom').call(z.transform, zoomIdentity
         .scale(width / (s[1] - s[0]))
         .translate(-s[0], 0));
     }
 
     function zoomed() {
-      if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') {
+      if (event.sourceEvent && event.sourceEvent.type === 'brush') {
         return;
       }
-      const t = d3.event.transform;
+      const t = event.transform;
       x.domain(t.rescaleX(x2).domain());
       lineChart.selectAll('.dot').transition().attr('cx', (d: any) => x(d.date));
-      lineChart.select('.line').transition().attr('d', line);
+      lineChart.select('.line').transition().attr('d', ln);
       focus.select('.axis--x').call(xAxis);
       context.select('.brush').call(brush.move, x.range().map(t.invertX, t));
     }
@@ -198,17 +212,17 @@ export class ScalableLineChartComponent implements OnInit {
     window.addEventListener('amount-changed', (payload: any) => {
       if (payload && payload.detail) {
         data = transformData(payload.detail);
-        y.domain([d3.min(data, (d: any) => Number(d.amount)), d3.max(data, (d: any) => Number(d.amount))]);
+        y.domain([min(data, (d: any) => Number(d.amount)), max(data, (d: any) => Number(d.amount))]);
         const fn = (d: any) => y(d.amount);
-        const ln = d3.line()
+        const ln1 = line()
           .x((d: any) => x(d.date))
           .y(fn);
-        const ln2 = d3.line()
+        const ln2 = line()
           .x((d: any) => x2(d.date))
           .y((d: any) => y2(d.amount));
         y2.domain(y.domain());
         lineChart.selectAll('.dot').data(data).transition().attr('cy', fn);
-        lineChart.select('.line').datum(data).transition().attr('d', ln);
+        lineChart.select('.line').datum(data).transition().attr('d', ln1);
         context.select('.line').datum(data).transition().attr('d', ln2);
         focus.selectAll('.axis--y').call(yAxis);
       }
