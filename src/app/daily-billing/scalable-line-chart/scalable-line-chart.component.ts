@@ -191,8 +191,13 @@ export class ScalableLineChartComponent implements OnInit {
         const ln = d3.line()
           .x((d: any) => x(d.date))
           .y(fn);
+        const ln2 = d3.line()
+          .x((d: any) => x2(d.date))
+          .y((d: any) => y2(d.amount));
+        y2.domain(y.domain());
         lineChart.selectAll('.dot').data(data).transition().attr('cy', fn);
         lineChart.select('.line').datum(data).transition().attr('d', ln);
+        context.select('.line').datum(data).transition().attr('d', ln2);
         focus.selectAll('.axis--y').call(yAxis);
       }
     });
