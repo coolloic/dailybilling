@@ -6,7 +6,7 @@
       <app-file-upload (fileChangeEmitter)="onFileSelected($event)"></app-file-upload>
     </fieldset>
   </div>
-  <div two *ngIf="billPreview.isLoaded || false">
+  <div two *ngIf="(billPreview.isLoaded && billStepper.activeContentIndex === 2) || false">
     <fieldset class="no-padding no-margin">
       <legend>{{stepper[1].title}}</legend>
       <app-bill-preview [header]="billPreview.header"
@@ -14,7 +14,7 @@
                         (initBalanceChangeEmitter)="onInitBalanceChanged($event)"></app-bill-preview>
     </fieldset>
   </div>
-  <div three *ngIf="billPreview.isLoaded || false">
+  <div three *ngIf="(billPreview.isLoaded && billStepper.activeContentIndex === 3) || false">
     <fieldset class="no-padding no-margin">
       <legend>{{stepper[2].title}}</legend>
       <app-scalable-line-chart [data]="billPreview.items | sortByDate "
