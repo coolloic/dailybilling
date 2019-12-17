@@ -3,7 +3,6 @@ import {CSVReader, CSVResponse, CSVResponseCode} from '../shared/util/csvreader'
 import {FileUploadComponent} from './file-upload/file-upload.component';
 import {BillPreview} from './pojo/bill-preview';
 import {Bill} from './pojo/bill';
-import {BillLineChartComponent} from './bill-line-chart/bill-line-chart.component';
 import {BillStepperComponent} from './bill-stepper/bill-stepper.component';
 
 @Component({
@@ -27,9 +26,6 @@ export class DailyBillingComponent implements AfterViewInit {
 
   @ViewChild(FileUploadComponent, {static: false})
   private fileInputFiled: FileUploadComponent;
-
-  @ViewChild(BillLineChartComponent, {static: false})
-  private lineChart: BillLineChartComponent;
 
   @ViewChild(BillStepperComponent, {static: false})
   private billStepper: BillStepperComponent;
@@ -67,7 +63,6 @@ export class DailyBillingComponent implements AfterViewInit {
       // update amount
       bill.amount = Number(payload.value);
       // refresh line chart on amount changed
-      // this.lineChart.refreshDot();
       window.dispatchEvent(new CustomEvent('amount-changed', {detail: this.billPreview.items}));
     }
   }
