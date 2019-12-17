@@ -154,7 +154,7 @@ export class ScalableLineChartComponent implements OnInit {
       .attr('r', 10)
       .attr('title', (d: any) => d.amount)
       .on('click', (d: any) => {
-        window.dispatchEvent(new CustomEvent('dot-clicked', {detail: {...d, x: x(d.date), y: y(d.amount)}}));
+        window.dispatchEvent(new CustomEvent('dot-clicked', {detail: {...d, x: 60, y: y(d.amount)}}));
       });
 
     context.append('path')
