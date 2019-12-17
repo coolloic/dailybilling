@@ -20,11 +20,12 @@
       height 1px
       width 90%
       background-color #ccc
-    @media (min-width 768px)
-      width auto
-      position relative
-      padding 15px
-      margin-bottom 20px
+    &.non-sticky
+      @media (min-width 768px)
+        width auto
+        position relative
+        padding 15px
+        margin-bottom 20px
     .step--divider
       display block
       flex 1 1 0
@@ -70,9 +71,10 @@
     padding-top 60px
     margin-bottom 87px
     max-width 100%
-    @media (min-width 768px)
-      padding-top 0
-      margin-bottom 0
+    &.non-sticky
+      @media (min-width 768px)
+        padding-top 0
+        margin-bottom 0
     .step--content
       display none
       &.step--active
@@ -85,15 +87,18 @@
     box-shadow 0 -3px 3px 0 rgba(32, 33, 36, 0.18)
     position fixed
     bottom 0
+    left 0
     z-index 99
     width 100%
     background-color #fff
     overflow hidden
     @media (min-width 768px)
-      margin-top 30px
       justify-content flex-end
-      width auto
-      position relative
+    &.non-sticky
+      @media (min-width 768px)
+        margin-top 30px
+        width auto
+        position relative
 
     button
       font-size 1.5rem
@@ -109,7 +114,10 @@
       &:last-child
         margin-right 16px
         @media (min-width 768px)
-          margin-right 0
+          margin-right 20px
+        &.non-sticky
+          @media (min-width 768px)
+            margin-right 0
       &.primary
         background-color steelblue
         color #fff
